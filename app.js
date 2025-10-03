@@ -17,6 +17,12 @@ import {pinoHttp, logger} from './utils/logging.js';
 
 const app = express();
 
+const messages = [
+    'First',
+    'Second',
+    'Third'
+]
+
 // Use request-based logger for log correlation
 app.use(pinoHttp);
 
@@ -26,7 +32,7 @@ app.get('/', async (req, res) => {
   logger.info({logField: 'custom-entry', arbitraryField: 'custom-entry'}); // Example of structured logging
   // Use request-based logger with log correlation
   req.log.info('Child logger with trace Id.'); // https://cloud.google.com/run/docs/logging#correlate-logs
-  res.send('Howdy partner!');
+  res.send(messages.pop());
 });
 
 export default app;
